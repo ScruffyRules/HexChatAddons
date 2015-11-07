@@ -16,9 +16,9 @@ import hexchat
 
 __module_name__ = 'Same Channel Colour'
 __module_version__ = '1.0'
-__module_description__ = 'Later'
+__module_description__ = 'Highlights channels that you and whoever you whois are in'
 
-colour = "7"
+colour = "07"
 Halt = False
 
 def whoischan_cb(word, word_eol, userdata):
