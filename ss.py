@@ -138,7 +138,7 @@ def updateCacheList():
 	cache_list = []
 	for i in json.loads(httpresponse.read().decode()):
 		if i["path"][-3:] == ".py":
-			if not i["path"] in ["loader.py"]:
+			if not i["path"] in ["ss.py", "loader.py"]:
 				cache_list.append(i["path"][:-3])
 
 hexchat.hook_command("SS", ss_cb)
