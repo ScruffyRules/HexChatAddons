@@ -16,9 +16,9 @@ import hexchat
 
 __module_name__ = 'Pinger'
 __module_version__ = '1.0'
-__module_description__ = 'Later'
+__module_description__ = 'My custom pinging script'
 
-channels = ["#spigot-irc-staff","#oresomecraft-admin","#ausfrag","#scruffyrules"]
+channels = ["#spigot-irc-staff", "#ausfrag", "#scruffyrules"]
 
 def pinger_cb(word, word_eol, userdata):
 	for i in channels:
