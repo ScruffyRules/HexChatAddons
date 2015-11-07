@@ -8,6 +8,8 @@ File:
 ####Description
 `Improves chat view for AikarStream in #aikar on Spigot`
 
+Orginal File and Creator: [AikarStream.py](https://gist.github.com/aikar/96754416f6c9db18fd2e) by @aikar
+
 ---
 ###Auto Invite
 File:
