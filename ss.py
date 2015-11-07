@@ -45,6 +45,9 @@ for i in os.listdir(ss_dir):
 	if onstartload:
 		hexchat.command("py load " + os.path.join(ss_dir, i))
 
+def pprefix(string):
+	print(__module_shortname__ + "\t" + string)
+
 def ss_cb(word, word_eol, userdata):
 	if len(word) < 2:
 		word.append("help")
@@ -58,10 +61,10 @@ def ss_cb(word, word_eol, userdata):
 			else:
 				colourlist.append(i)
 		
-		print(__module_shortname__ + "\t" + "List of Scripts: " + ", ".join(colourlist))
+		pprefix("List of Scripts: " + ", ".join(colourlist))
 	elif word[1].lower() == "get":
 		if not len(word) == 3:
-			print(__module_shortname__ + "\t" + "Usage: /SS GET <script[.py]>")
+			pprefix("Usage: /SS GET <script[.py]>")
 			return hexchat.EAT_HEXCHAT
 		
 		script = word[2]
@@ -75,15 +78,15 @@ def ss_cb(word, word_eol, userdata):
 		if script in cache_list:
 			hexchat.hook_timer(0, download, [script + ".py", True])
 		else:
-			print(__module_shortname__ + "\t" + "\"{0}\" is not a known script!".format(word[2]))
+			pprefix("\"{0}\" is not a known script!".format(word[2]))
 	elif word[1].lower() == "startup":
 		if not len(word) == 3:
-			print(__module_shortname__ + "\t" + "Usage: /SS STARTUP <True/False>")
+			pprefix("Usage: /SS STARTUP <True/False>")
 			return hexchat.EAT_HEXCHAT
 		
 		onstartload = bool(False if word[2].lower() == "false" else True)
 		hexchat.set_pluginpref("ss_onstartload", onstartload)
-		print(__module_shortname__ + "\t" + "On startup load plugins is set to\002\0030" + ("3" if onstartload else "4"), onstartload, "\017")
+		pprefix("On startup load plugins is set to\002\0030" + ("3" if onstartload else "4"), onstartload, "\017")
 	elif word[1].lower() == "update":
 		callCacheList()
 		for i in dlss_list:
@@ -91,12 +94,12 @@ def ss_cb(word, word_eol, userdata):
 				hexchat.hook_timer(0, pyunload_timer, i)
 				hexchat.hook_timer(0, download, [i])
 	else:
-		print(__module_shortname__ + "\t" + "/SS HELP -- Shows this help message")
-		print(__module_shortname__ + "\t" + "/SS LIST -- Lists all SS Scripts you can get")
-		print(__module_shortname__ + "\t" + "/SS GET <script[.py]> -- Downloads and loads <script>")
-		print(__module_shortname__ + "\t" + "/SS STARTUP <True/False> -- Loads scripts on startup")
-		print(__module_shortname__ + "\t" + "/SS UPDATE -- Updates all SS Scripts")
-		print(__module_shortname__ + "\t" + "You have \00304{}\017 API Calls left!".format("~"+str(apicallsleft) if apicallsleft == 60 else apicallsleft))
+		pprefix("/SS HELP -- Shows this help message")
+		pprefix("/SS LIST -- Lists all SS Scripts you can get")
+		pprefix("/SS GET <script[.py]> -- Downloads and loads <script>")
+		pprefix("/SS STARTUP <True/False> -- Loads scripts on startup")
+		pprefix("/SS UPDATE -- Updates all SS Scripts")
+		pprefix("You have \00304{}\017 API Calls left!".format("~"+str(apicallsleft) if apicallsleft == 60 else apicallsleft))
 	return hexchat.EAT_HEXCHAT
 
 def download(stuff):
@@ -105,13 +108,13 @@ def download(stuff):
 	verbose = True if len(stuff) >1 else False
 	try:
 		if verbose:
-			hexchat.emit_print("Channel Message", __module_shortname__, "Downloading {}...".format(script), "")
+			pprefix("Downloading {}...".format(script))
 		urllib_request.urlretrieve(raw + script, os.path.join(ss_dir, script))
 	except urllib_error.HTTPError as err:
-		hexchat.emit_print("Channel Message", __module_shortname__, "Error downloading {} ({})".format(script, err), "")
+		pprefix("Error downloading {} ({})".format(script, err)
 	else:
 		if verbose:
-			hexchat.emit_print("Channel Message", __module_shortname__, "Download complete, loading script...", "")
+			pprefix("Download complete, loading script..."
 		hexchat.hook_timer(0, pyload_timer, script)
 	return False #For Timer
 
