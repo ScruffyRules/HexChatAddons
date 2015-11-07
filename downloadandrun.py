@@ -20,7 +20,7 @@ import os
 
 __module_name__ = 'DownloadAndRun'
 __module_version__ = '1.0'
-__module_description__ = 'Downloads and loads python scripts'
+__module_description__ = 'Downloads and loads Python scripts'
 __module_shortname__ = "00,01DNR"
 
 addon_dir = os.path.join(hexchat.get_info('configdir'), 'addons')
@@ -65,5 +65,5 @@ def isURL(url):
 		return True
 	return False
 
-hexchat.hook_command("download", download_cb)
+hexchat.hook_command("DOWNLOAD", download_cb)
 hexchat.prnt(__module_name__ + ' script loaded')
