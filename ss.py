@@ -111,10 +111,10 @@ def download(stuff):
 			pprefix("Downloading {}...".format(script))
 		urllib_request.urlretrieve(raw + script, os.path.join(ss_dir, script))
 	except urllib_error.HTTPError as err:
-		pprefix("Error downloading {} ({})".format(script, err)
+		pprefix("Error downloading {} ({})".format(script, err))
 	else:
 		if verbose:
-			pprefix("Download complete, loading script..."
+			pprefix("Download complete, loading script...")
 		hexchat.hook_timer(0, pyload_timer, script)
 	return False #For Timer
 
