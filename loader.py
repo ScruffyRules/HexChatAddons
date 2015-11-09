@@ -24,5 +24,5 @@ __module_description__ = 'Loads Python scripts in an external directory'
 extdir = join(join(hexchat.get_info("configdir"), "addons"), "extplugins")
 
 for i in glob(join(extdir, "*.py")):
-	if not i == "loader.py":
+	if not "loader.py" in i:
 		hexchat.command("py load " + i)
