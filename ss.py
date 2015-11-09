@@ -76,6 +76,7 @@ def ss_cb(word, word_eol, userdata):
 		
 		callCacheList()
 		if script in cache_list:
+			dlss_list.append(script + ".py")
 			hexchat.hook_timer(0, download, [script + ".py", True])
 		else:
 			pprefix("\"{0}\" is not a known script!".format(word[2]))
@@ -123,7 +124,7 @@ def pyload_timer(script):
 	return False
 
 def pyunload_timer(script):
-	hexchat.command("py unload {}".format(os.path.join(ss_dir, script)))
+	hexchat.command("py unload {}".format(script))
 	return False
 
 def callCacheList():
@@ -141,5 +142,10 @@ def updateCacheList():
 			if not i["path"] in ["ss.py", "loader.py"]:
 				cache_list.append(i["path"][:-3])
 
+def unload_cb(userdata):
+	for i in dlss_list:
+		hexchat.command("py unload {}".format(i))
+
 hexchat.hook_command("SS", ss_cb)
+hexchat.hook_unload(unload_cb)
 hexchat.prnt(__module_name__ + ' script loaded!')
