@@ -84,6 +84,13 @@ File:
 `Loads python scripts in an external directory`
 
 ---
+###Green Text
+File:
+[greentext.py](https://github.com/ScruffyRules/HexChatAddons/blob/master/greentext.py)
+####Description
+`When you type > it turns it into green text`
+
+---
 ###Pinger
 File:
 [pinger.py](https://github.com/ScruffyRules/HexChatAddons/blob/master/pinger.py)
